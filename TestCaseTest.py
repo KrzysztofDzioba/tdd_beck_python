@@ -8,17 +8,20 @@ class TestCaseTest(unittest.TestCase):
     def setUp(self):
         self.test = WasRun("testMethod")
 
-    def testSetUp(self):
+    def testTemplateMethod(self):
         test = WasRun("testMethod")
         test.run()
-        assert(test.wasSetUp)
+        assert("setUp testMethod tearDown " == test.log)
 
-    def testRunning(self):
-        self.test.run()
-        assert(self.test.wasSetUp)
+    def testResult(self):
+        test = WasRun("testMethod")
+        result = test.run()
+        assert("1 run, 0 failed" == result.summary())
 
-TestCaseTest("testRunning").run()
-
+    def testFailedResult(self):
+        test = WasRun("testBrokenMethod")
+        result = test.run()
+        assert("1 run, 1 failed", result.summary())
 
 
 if __name__ == '__main__':
