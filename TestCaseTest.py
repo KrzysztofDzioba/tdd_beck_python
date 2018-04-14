@@ -5,11 +5,17 @@ from WasRun import WasRun
 
 class TestCaseTest(unittest.TestCase):
 
-    def testRunning(self):
+    def setUp(self):
+        self.test = WasRun("testMethod")
+
+    def testSetUp(self):
         test = WasRun("testMethod")
-        assert(not test.wasRun)
         test.run()
-        assert(test.wasRun)
+        assert(test.wasSetUp)
+
+    def testRunning(self):
+        self.test.run()
+        assert(self.test.wasSetUp)
 
 TestCaseTest("testRunning").run()
 
